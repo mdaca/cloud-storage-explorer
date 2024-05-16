@@ -1,0 +1,48 @@
+.monitor-info-green > .monitor-info-value {
+    color: rgb(119, 172, 83);
+}
+
+.monitor-info-green {
+    border-left: 4px solid rgb(119, 172, 83);
+}
+
+.monitor-info-red > .monitor-info-value {
+    color: rgb(151, 1, 1);
+}
+
+.monitor-info-red {
+    border-left: 4px solid rgb(151, 1, 1);
+}
+
+.monitor-info-yellow > .monitor-info-value {
+    color: rgb(249, 194, 40);
+}
+
+.monitor-info-yellow {
+    border-left: 4px solid rgb(249, 194, 40);
+}
+
+.monitor-info-value {
+    font-size: 40pt;
+    line-height: 40pt;
+}
+
+#monitor-detail-top .monitor-info-value {
+    font-size: 24pt;
+    line-height: 24pt;
+}
+
+#monitor-detail-bottom > div {
+    padding-left: 8px;
+}
+
+#monitor-detail-top,
+#monitor-detail-container {
+    margin-bottom: 32px;
+}
+
+#monitor-detail-container {
+    padding: 16px;
+    border: 1px solid #dbdbdb;
+    box-shadow: 4px 4px 2px #eeeeee;
+}

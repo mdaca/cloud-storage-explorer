@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile="spnego-7.0.jar" -DgroupId="net.sourceforge.spnego" -DartifactId=spnego -Dversion="7.0" -Dpackaging=jar -DgeneratePom=true

@@ -1,0 +1,11 @@
+#query-grid td[data-field="Query"] {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#new-query-container,
+#delete-queries-container {
+    text-align: center;
+    margin: 16px 0;
+}

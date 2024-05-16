@@ -1,0 +1,33 @@
+<persistence version="2.0"
+    xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="storexppu">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    
+    <!-- TODO The jta-data-source (for JTA-aware data sources)
+      and non-jta-data-source (for non-JTA-aware data sources)
+      elements specify the global JNDI name of the data source
+      to be used by the container. -->
+     <non-jta-data-source>java:jboss/datasources/storexpDS</non-jta-data-source>
+    
+    <class>com.spinsys.mdaca.storage.explorer.persistence.ActionAudit</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.AppConfig</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.Drive</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.DriveMemoryUsageHistory</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.DriveProperty</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.DriveSecurityRule</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.DriveUser</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.MemoryUsage</class>
+    <class>com.spinsys.mdaca.storage.explorer.persistence.WorkspaceConfig</class>
+    <properties>
+	    <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+	    <property name="hibernate.connection.datasource" value="java:jboss/datasources/storexpDS"/>
+	    <!-- Scan for annotated classes and Hibernate mapping XML files  -->
+	    <property name="hibernate.archive.autodetection" value="class, hbm"/>
+	    <property name="hibernate.hbm2ddl.auto" value="update" /> 
+	    <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+		<property name="hibernate.default_schema" value="public" />
+    </properties>
+  </persistence-unit>
+</persistence> 

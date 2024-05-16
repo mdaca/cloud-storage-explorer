@@ -1,0 +1,6 @@
+#error-log-grid td[data-field="StackTrace"],
+#error-log-grid td[data-field="Message"] {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

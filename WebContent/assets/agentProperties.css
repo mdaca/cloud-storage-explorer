@@ -1,0 +1,54 @@
+#agent-properties-container h4 {
+    display: inline-block;
+    font-size: 16pt;
+    margin-bottom: 8px;
+}
+
+#agent-properties-container label[for] {
+    width: 150px;
+    display: inline-block;
+}
+
+#agent-properties-container input[type="text"]:not(.k-input),
+#agent-properties-container input[type="password"]
+ {
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom: 1px solid #777;
+    color: #777;
+    padding: 2px;
+    width: calc(100% - 170px);
+
+}
+
+#agent-properties-container input[type="text"]:focus,
+#agent-properties-container input[type="password"]:focus {
+    outline-width: 0;
+}
+
+#agent-properties-container input#url-field {
+    margin-left: 16px;
+    width: 33%;
+}
+
+#agent-properties-container .url-header {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#agent-properties-container .col > div {
+    margin-bottom: 8px;
+}
+
+#agent-properties-container .k-dropdown-wrap {
+    height: 2em;
+}
+
+#button-row {
+    text-align: center;
+}
+
+#button-row > button {
+    width: 200px;
+}

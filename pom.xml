@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mdaca-storage-explorer-services</groupId>
+	<artifactId>mdaca-storage-explorer-services</artifactId>
+	<version>3.1.5</version>
+	<packaging>war</packaging>
+	<repositories>
+		<repository>
+			<id>jboss-ga-repository</id>
+			<url>https://maven.repository.redhat.com/ga/</url>
+		</repository>
+   <repository>
+      <id>jboss</id>
+      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+   </repository>
+	</repositories>
+	<properties>
+		<apache.commons.collection.version>4.1</apache.commons.collection.version>
+		<apache.commons.io.version>2.8.0</apache.commons.io.version>
+		<apache.commons.lang.version>3.11</apache.commons.lang.version>
+		<apache.commons.math.version>3.6.1</apache.commons.math.version>
+		<apache.httpclient.version>4.5.13</apache.httpclient.version>
+		<apache.httpcore.version>4.4.9</apache.httpcore.version>
+		<avro.version>1.10.2</avro.version>
+		<aws.java.sdk.version>1.11.1023</aws.java.sdk.version>
+		<awssdk.version>2.16.67</awssdk.version>
+		<azure.storage.blob.version>12.10.2</azure.storage.blob.version>
+		<azure.storage.version>8.6.6</azure.storage.version>
+		<google.cloud.storage.version>1.113.9</google.cloud.storage.version>
+		<gson.version>2.2.2</gson.version>
+		<hadoop.version>3.3.0</hadoop.version>
+		<hibernate.core.version>4.2.18.Final-redhat-2</hibernate.core.version>
+		<hive.jdbc.version>3.1.2</hive.jdbc.version>
+		<jarchivelib.version>1.1.0</jarchivelib.version>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+		<javax.security.auth.version>1.1</javax.security.auth.version>
+		<jboss.negotiation.version>2.3.6.Final-redhat-1</jboss.negotiation.version>
+		<jboss.servlet.api.version>1.0.2.Final-redhat-2</jboss.servlet.api.version>
+		<junit.jupiter.version>5.5.2</junit.jupiter.version>
+		<junit.platform.version>1.5.1</junit.platform.version>
+		<lingala.zip4j.version>2.6.1</lingala.zip4j.version>
+		<log4j.version>2.16.0</log4j.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
+		<maven.war.plugin.version>3.2.3</maven.war.plugin.version>
+		<mockito.version>3.6.0</mockito.version>
+		<parquet.avro.version>1.12.0</parquet.avro.version>
+		<plexus.archiver.version>2.2</plexus.archiver.version>
+		<resteasy.version>6.0.1.Final</resteasy.version>
+		<smbj.version>0.10.0</smbj.version>
+		<spnego.version>7.0</spnego.version>
+		<tablesaw.version>0.38.1</tablesaw.version>
+		<tomcat.catalina.version>7.0.0</tomcat.catalina.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>bom</artifactId>
+				<version>${awssdk.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+	    </dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		    <version>42.2.23</version>
+		</dependency>
+        
+		<dependency>
+		    <groupId>org.javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.25.0-GA</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.wildfly.security</groupId>
+		    <artifactId>wildfly-elytron</artifactId>
+		    <version>1.20.1.Final</version>
+	      	<scope>provided</scope>
+		</dependency>
+
+        <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+    	  <version>2.5</version>
+	      <scope>provided</scope>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>5.2.3.Final</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.apache.ranger</groupId>
+		    <artifactId>ranger-plugins-common</artifactId>
+		    <version>2.1.0</version>
+		    <exclusions>
+				<exclusion>
+				    <groupId>org.elasticsearch.client</groupId>
+				    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+				</exclusion>
+			    <exclusion>
+				    <groupId>log4j</groupId>
+				    <artifactId>log4j</artifactId>
+				</exclusion>
+			    <exclusion>
+    				<groupId>org.apache.logging.log4j</groupId>
+				    <artifactId>log4j-core</artifactId>
+				</exclusion>
+			    <exclusion>
+    				<groupId>org.apache.logging.log4j</groupId>
+				    <artifactId>log4j-api</artifactId>
+				</exclusion>
+			<exclusion>
+			    <groupId>org.apache.solr</groupId>
+			    <artifactId>solr-solrj</artifactId>
+			</exclusion>
+			<exclusion>
+			    <groupId>javax.xml.bind</groupId>
+			    <artifactId>jaxb-api</artifactId>
+			</exclusion>
+			<exclusion>
+			    <groupId>com.sun.xml.bind</groupId>
+			    <artifactId>jaxb-impl</artifactId>
+			</exclusion>
+			<exclusion>
+			    <groupId>com.sun.xml.bind</groupId>
+			    <artifactId>jaxb-core</artifactId>
+			</exclusion>
+			<exclusion>
+			    <groupId>org.glassfish.jaxb</groupId>
+			    <artifactId>jaxb-runtime</artifactId>
+			</exclusion>
+		    </exclusions>
+		</dependency>
+	    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>${log4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.spnego</groupId>
+			<artifactId>spnego</artifactId>
+			<version>${spnego.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>${tomcat.catalina.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-entitymanager</artifactId> 
+			<version>${hibernate.core.version}</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>${resteasy.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+			<version>${jboss.servlet.api.version}</version>
+			<scope>provided</scope>
+		</dependency>  
+		<dependency>
+		    <groupId>javax.enterprise.concurrent</groupId>
+		    <artifactId>javax.enterprise.concurrent-api</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.security.jacc</groupId>
+		    <artifactId>javax.security.jacc-api</artifactId>
+		    <version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.security.auth.message</groupId>
+			<artifactId>javax.security.auth.message-api</artifactId>
+			<version>${javax.security.auth.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.security</groupId>
+			<artifactId>jboss-negotiation-common</artifactId>
+			<version>${jboss.negotiation.version}</version>
+		</dependency>
+		<!--<dependency>
+				<groupId>org.jboss.security</groupId>
+			<artifactId>jboss-negotiation-extras</artifactId>
+			<version>${jboss.negotiation.version}</version>
+		</dependency>  -->
+
+		<!-- Amazon web services -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>${aws.java.sdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+		</dependency>
+
+		<!-- jboss-servlet-api_3.0_spec-1.0.2.Final-redhat-2 Added to fix NoSuchMethodError: 
+			org.apache.http.conn.ssl.SSLConnectionSocketFactory.<init>(Ljavax/net/ssl/SSLContext;Ljavax/net/ssl/HostnameVerifier;)V, 
+			per https://stackoverflow.com/questions/37979097/nosuchmethoderror-org-apache-http-conn-ssl-sslconnectionsocketfactory -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<!-- Should match up with version in jboss-eap-6.4\modules\system\layers\base\org\apache\httpcomponents\main -->
+			<version>${apache.httpclient.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${apache.httpcore.version}</version>
+		</dependency>
+
+		<!-- SMB -->
+		<dependency>
+			<groupId>com.hierynomus</groupId>
+			<artifactId>smbj</artifactId>
+			<version>${smbj.version}</version>
+		</dependency>
+
+		<!-- Gson: Java to Json conversion -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1.1-jre</version>
+		</dependency>
+
+		<!-- JUnit unit testing -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit.platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito mocking framework for JUnit Jupiter -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${apache.commons.lang.version}</version>
+		</dependency>
+
+		<!-- apache commons collecitons -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${apache.commons.collection.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${apache.commons.io.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+				</exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-server</artifactId>
+                </exclusion>
+			</exclusions>
+	
+		</dependency>
+
+		<!-- zip4j (for extracting zip files) -->
+		<dependency>
+			<groupId>net.lingala.zip4j</groupId>
+			<artifactId>zip4j</artifactId>
+			<version>${lingala.zip4j.version}</version>
+		</dependency>
+
+		<!-- (for extracting tar files) -->
+		<dependency>
+			<groupId>org.rauschig</groupId>
+			<artifactId>jarchivelib</artifactId>
+			<version>${jarchivelib.version}</version>
+		</dependency>
+
+		<!-- (for extracting gz files) -->
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-archiver</artifactId>
+			<version>${plexus.archiver.version}</version>
+		</dependency>
+
+		<!-- Azure Blob -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-storage</artifactId>
+			<version>${azure.storage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-storage-blob</artifactId>
+			<version>${azure.storage.blob.version}</version>
+		</dependency>
+
+		<!-- Google Cloud Storage -->
+		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage -->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-storage</artifactId>
+			<version>${google.cloud.storage.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.hive</groupId>
+		    <artifactId>hive-metastore</artifactId>
+		    <version>3.1.2</version>
+			<exclusions> 
+				<exclusion> 
+					<artifactId>jdk.tools</artifactId> 
+					<groupId>jdk.tools</groupId> 
+ 				</exclusion> 
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging</groupId>
+                    <artifactId>log4j-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.parquet</groupId>
+                    <artifactId>parquet-hadoop-bundle</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		 
+<!-- 	   <dependency> -->
+<!-- 		    <groupId>org.apache.hive</groupId> -->
+<!-- 		    <artifactId>hive-service-rpc</artifactId> -->
+<!-- 		    <version>3.1.2</version> -->
+<!-- 		</dependency> -->
+
+<!-- 		https://mvnrepository.com/artifact/org.apache.hive/hive-jdbc -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.hive</groupId> -->
+<!-- 			<artifactId>hive-jdbc</artifactId> -->
+<!-- 			<version>${hive.jdbc.version}</version> -->
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>jdk.tools</artifactId> -->
+<!-- 					<groupId>jdk.tools</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+<!-- 		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/io.trino/trino-hive-hadoop2 -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>io.trino</groupId> -->
+<!-- 		    <artifactId>trino-hive-hadoop2</artifactId> -->
+<!-- 		    <version>358</version> -->
+<!-- 		</dependency> -->
+
+		<!-- AVRO file processing -->
+		<dependency>
+			<groupId>org.apache.parquet</groupId>
+			<artifactId>parquet-avro</artifactId>
+			<version>${parquet.avro.version}</version>
+		</dependency>
+
+		<!-- Enables Parquet file processing in AWS -->
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws -->
+		<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-client</artifactId>
+		<version>${hadoop.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-aws</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+
+		<!-- Enables Parquet file processing in AzureBlob -->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-azure</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+
+		<!-- Enables Parquet file processing in GCS -->
+		<!-- https://search.maven.org/artifact/com.google.cloud.bigdataoss/gcs-connector -->
+		<dependency>
+			<groupId>com.google.cloud.bigdataoss</groupId>
+			<artifactId>gcs-connector</artifactId>
+			<version>hadoop3-2.2.1</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+
+		<!-- Tablesaw does CSV file manipulation -->
+		<dependency>
+			<groupId>tech.tablesaw</groupId>
+			<artifactId>tablesaw-core</artifactId>
+			<version>${tablesaw.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>${apache.commons.math.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>${avro.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+		<!-- <sourceDirectory>src/main/java</sourceDirectory> -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.source.version}</source>
+					<target>${java.target.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven.war.plugin.version}</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- Unit testing using surefire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.failsafe.version}</version> <!-- consistent with failsafe -->
+				<configuration>
+					<excludedGroups>integration</excludedGroups>
+				</configuration>
+			</plugin>
+
+			<!-- Integration testing using failsafe -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven.failsafe.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.fortify.sca.plugins.maven</groupId>
+				<artifactId>sca-maven-plugin</artifactId>
+				<version>20.1.0</version>
+				<configuration>
+					<findbugs>true</findbugs>
+					<htmlReport>true</htmlReport>
+					<maxHeap>800M</maxHeap>
+					<source>1.8</source>
+					<buildId>1.0.0</buildId>
+					<verbose>true</verbose>
+					<skipTests>true</skipTests>
+					<toplevelArtifactId>mdaca-storage-explorer-services</toplevelArtifactId>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
