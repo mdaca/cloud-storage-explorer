@@ -1,7 +1,7 @@
 # MDACA Cloud Storage Explorer - Solution Accelerator
 ## MDACA Cloud Storage Explorer is a web-based file explorer that is designed to allow you to manage files across a wide range of cloud storage providers through a single integrated solution
 
-he MDACA Cloud Storage Explorer allows the user to securely manage files stored in a single or multi-cloud environment by leveraging a web browser to browse, upload, download, move, copy and delete files, create folders, and perform other file management operations across environments through a single, centralized interface. 
+The MDACA Cloud Storage Explorer allows the user to securely manage files stored in a single or multi-cloud environment by leveraging a web browser to browse, upload, download, move, copy and delete files, create folders, and perform other file management operations across environments through a single, centralized interface. 
 
 Administration features include the ability to apply granular security rules coupled to enterprise groups and detailed auditing. 
 
@@ -28,11 +28,9 @@ We've built a Solution Accelerator to empower your workforce with MDACA Cloud St
 3. Setup Postgres as a Database Server:
    Postgres should be running and available to store the the application metadata.
 
-   💡Note: 
-
 # 👋🏻 Introduction
 
-MDACA Cloud Storage Explorer is built with the following technologies
+To get familiar with MDACA Cloud Storage Explorer, please review the following guides:
 
 [User Guide](https://mdaca.io/wp-content/uploads/2022/10/MDACA_CloudStorageExplorer_AdminGuide_v3.0.1.pdf)
 
@@ -42,7 +40,7 @@ MDACA Cloud Storage Explorer is built with the following technologies
 
 [Deploy in AWS using the Marketplace AMI](https://aws.amazon.com/marketplace/pp/prodview-hdhyhdicp72v6)
 
-Deploy the AMI and get setup using the quick launch guide: [https://mdaca.io/support/documentation/privategpt/launch-guide/](https://mdaca.io/support/documentation/cloud-storage-explorer/launch-guide/)
+Deploy the AMI and get setup using the quick launch guide: [https://mdaca.io/support/documentation/cloud-storage-explorer/launch-guide/](https://mdaca.io/support/documentation/cloud-storage-explorer/launch-guide/)
 
 # 👨🏻‍💻 Run from your local machine
 
